@@ -33,13 +33,13 @@ class Game:
                 connect.close()
                 break
 
-            command, argument = self.decode_data(raw_data)
+            command, argument = self._decode_data(raw_data)
 
             if command == self._SUCCESS_COMMAND:
                 result = self._check_user_number(hidden_number, argument)
-                connect.send(self.encode_data(result))
+                connect.send(self._encode_data(result))
             else:
-                connect.send(self.encode_data('Неверная команда'))
+                connect.send(self._encode_data('Неверная команда'))
                 connect.close()
                 break
 
@@ -53,12 +53,12 @@ class Game:
             return 'less'
 
     @staticmethod
-    def decode_data(data: bytes):
+    def _decode_data(data: bytes):
         prepare_data = data.decode('utf-8').split(',')
         return prepare_data[0], int(prepare_data[1])
 
     @staticmethod
-    def encode_data(data: str):
+    def _encode_data(data: str):
         return data.encode('utf-8')
 
     

@@ -19,10 +19,10 @@ class Gamer:
         while True:
             user_number = input('Введите число: ')
             send_str = f'{self._DEFAULT_COMMAND}, {user_number}'
-            sock.send(self.encode_data(send_str))
+            sock.send(self._encode_data(send_str))
 
             raw_data = sock.recv(self._DATA_COUNT)
-            data = self.decode_data(raw_data)
+            data = self._decode_data(raw_data)
             print(data)
 
             if data == self._SUCCESS_RESPONSE:
@@ -30,11 +30,11 @@ class Gamer:
                 break
 
     @staticmethod
-    def encode_data(data: str):
+    def _encode_data(data: str):
         return data.encode('utf-8')
 
     @staticmethod
-    def decode_data(data: bytes):
+    def _decode_data(data: bytes):
         return data.decode('utf-8')
 
 
